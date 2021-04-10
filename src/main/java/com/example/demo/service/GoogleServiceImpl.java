@@ -27,7 +27,6 @@ public class GoogleServiceImpl implements GoogleService {
     @Override
     public String getOauthUrl(){
         return googleProperties.getFullOauthUrl();
-
     }
 
     @Override

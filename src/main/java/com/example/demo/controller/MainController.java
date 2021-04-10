@@ -40,11 +40,12 @@ public class MainController {
     }
 
     @GetMapping("/signin")
-    public String signin(@CookieValue(value = "access_token") String access_token,
+    public String signin(@CookieValue(value = "access_token",
+                        defaultValue = "unknown") String access_token,
                          Model model) {
         if(access_token.equals("unknown")){
             model.addAttribute("logged_in", false);
-            model.addAttribute("oauth_Url", googleService.getOauthUrl());
+            model.addAttribute("oauth_url", googleService.getOauthUrl());
         }
         else{
             String name = googleService.getUserName(access_token);
