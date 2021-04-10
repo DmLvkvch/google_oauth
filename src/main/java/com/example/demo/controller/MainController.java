@@ -30,7 +30,7 @@ public class MainController {
                            Model model) {
         boolean loggedIn = false;
         String name = "new user";
-        if(!access_token.equals("unknown")) {
+        if(googleService.getUserName(access_token)!=null) {
             loggedIn = true;
             name = googleService.getUserName(access_token);
         }
@@ -43,7 +43,7 @@ public class MainController {
     public String signin(@CookieValue(value = "access_token",
                         defaultValue = "unknown") String access_token,
                          Model model) {
-        if(access_token.equals("unknown")){
+        if(googleService.getUserName(access_token) == null){
             model.addAttribute("logged_in", false);
             model.addAttribute("oauth_url", googleService.getOauthUrl());
         }
