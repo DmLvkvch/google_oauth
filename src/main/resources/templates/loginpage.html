@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<button th:id="login" th:if="${logged_in == false}" th:attr="onclick=|login()|">LogIn</button>
+<p th:unless="${logged_in == false}" th:text="'You are already signed in as ' + ${name} " />
+</body>
+
+<script>
+    function login() {
+        //window.location.href = 'https://accounts.google.com/o/oauth2/auth?access_type=offline&client_id=64219814910-h0ps84cerlm3jh9nrn7tfdd53v2uloa0.apps.googleusercontent.com&redirect_uri=http://localhost:8080/code&response_type=code&scope=https://www.googleapis.com/auth/gmail.labels%20https://www.googleapis.com/auth/gmail.readonly&state=176262121';
+        oauth_ur = '[[${oauth_url}]]'
+        oauth_ur = oauth_ur.replaceAll("amp;", "")
+        window.location.href = oauth_ur
+    }
+</script>
+</html>
