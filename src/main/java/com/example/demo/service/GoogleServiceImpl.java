@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -37,11 +38,15 @@ public class GoogleServiceImpl implements GoogleService {
                 .queryParam("access_token", accessToken)
                 .build().toString();
         RestTemplate getUserNameRequest = new RestTemplate();
-        var nameResponse= getUserNameRequest.getForEntity(nameRequestResource, Map.class);
-        if(nameResponse.getStatusCode()== HttpStatus.OK){
+        ResponseEntity<Map> nameResponse;
+        try {
+            nameResponse= getUserNameRequest.getForEntity(nameRequestResource, Map.class);
             return (String) Objects.requireNonNull(nameResponse.getBody()).get("emailAddress");
         }
-        return "";
+        catch (Exception e){
+            System.out.println(e.toString());
+        }
+        return null;
     }
 
     @Override
