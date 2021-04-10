@@ -3,6 +3,10 @@
 # google_oauth
 git clone https://github.com/DmLvkvch/google_oauth
 
+put google client_id and client_secret in src/main/resources/application.properties file
+
+add redirect uri (for google oauth) in google api console http://HOST:PORT/code
+
 mvn clean package
 
 cd target
