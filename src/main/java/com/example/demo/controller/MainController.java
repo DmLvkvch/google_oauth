@@ -29,10 +29,13 @@ public class MainController {
             defaultValue = "unknown") String access_token,
                            Model model) {
         boolean loggedIn = false;
-        String name = "new user";
-        if(googleService.getUserName(access_token)!=null) {
+        String name = googleService.getUserName(access_token);
+        
+        if(name != null) {
             loggedIn = true;
-            name = googleService.getUserName(access_token);
+        }
+        else {
+            name = "new user";
         }
         model.addAttribute("logged_in", loggedIn);
         model.addAttribute("name", name);
